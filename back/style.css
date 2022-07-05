@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'etam';
+  src: url(./etam-script.woff2) format('woff2'),
+    url(./etam-script.woff) format('woff');
+  font-weight: 600;
+  font-style: 'normal';
+}
+
+.hello {
+  color: red;
+  background: url(icon.svg);
+  font-family: 'etam';
+}
