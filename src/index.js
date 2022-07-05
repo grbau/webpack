@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import './style.css';
+//import './sass/main.scss'
 import printMe from './print.js';
 
  function component() {

@@ -1,0 +1,20 @@
+@import "../../helpers/variables";
+@import "../../helpers/mixins";
+
+.mainAccount {
+  padding-top: $headerHeightMobile;
+  background: $white;
+  width: 955px;
+  max-width: 100%;
+  margin: auto;
+  @include breakpoint(tab) {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding-top: $headerHeight;
+    grid-template-columns: calc(30% - #{$space-l}) calc(70% - #{$space-l});
+    grid-column-gap: $space-l;
+  }
+  #root.-dashboard {
+    display: block;
+  }
+}

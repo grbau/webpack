@@ -1,0 +1,413 @@
+/****************** Mixins ****************************/
+
+/**********************************************************
+**************margin and padding spacing******************
+**********************************************************/
+
+//Map of spacing value
+$spacevalues: (
+  xs: 5px,
+  s: 10px,
+  m: 15px,
+  l: 20px,
+  xl: 40px,
+  xxl: 50px,
+  xs-neg: -5px,
+  s-neg: -10px,
+  m-neg: -15px,
+  l-neg: -20px,
+  xl-neg: -40px,
+  xxl-neg: -50px,
+);
+
+//Dispatch all spaces variables
+$space-xs: map-get($spacevalues, "xs");
+$space-s: map-get($spacevalues, "s");
+$space-m: map-get($spacevalues, "m");
+$space-l: map-get($spacevalues, "l");
+$space-xl: map-get($spacevalues, "xl");
+$space-xxl: map-get($spacevalues, "xxl");
+$space-xs-neg: map-get($spacevalues, "xs-neg");
+$space-s-neg: map-get($spacevalues, "s-neg");
+$space-m-neg: map-get($spacevalues, "m-neg");
+$space-l-neg: map-get($spacevalues, "l-neg");
+$space-xl-neg: map-get($spacevalues, "xl-neg");
+$space-xxl-neg: map-get($spacevalues, "xxl-neg");
+
+//Map of spacing directions
+$directions: (
+  top: t,
+  bottom: b,
+  left: l,
+  right: r,
+  all: a
+);
+
+//Map of spacing types
+$types: (
+  margin: mg,
+  padding: pd
+);
+
+//Mixin spaces for generates correct classes
+@mixin generate-spacing($type, $direction) {
+  @each $name, $space in $spacevalues {
+    $mapGetDirection: if($direction != 'all', -#{map-get($directions, $direction)}, '');
+    .#{map-get($types, $type)}#{$mapGetDirection}-#{$name} {
+      @if $direction == 'all' {
+        #{$type}: #{$space};
+      } @else {
+        #{$type}-#{$direction}: #{$space};
+      }
+    }
+  }
+}
+
+//Mixin calls to generate each type of spacing
+@include generate-spacing(margin, bottom);
+@include generate-spacing(margin, top);
+@include generate-spacing(margin, left);
+@include generate-spacing(margin, right);
+@include generate-spacing(margin, all);
+@include generate-spacing(padding, bottom);
+@include generate-spacing(padding, top);
+@include generate-spacing(padding, left);
+@include generate-spacing(padding, right);
+@include generate-spacing(padding, all);
+
+/**********************************************************
+**************media queries breakpoint********************
+**********************************************************/
+
+//Map of breakpoint value
+$breakpoints: (
+  xs: 360px, // smaller device
+  ms: 480px, // mediumly small device
+  s: 768px, // small device
+  m: 1024px, // tablet device
+  tab: 1025px, // middle device
+  l: 1200px // large device
+);
+
+$breakpoints-xs: map-get($breakpoints, 'xs');
+$breakpoints-ms: map-get($breakpoints, 'ms');
+$breakpoints-s: map-get($breakpoints, 's');
+$breakpoints-m: map-get($breakpoints, 'm');
+$breakpoints-tab: map-get($breakpoints, 'tab');
+$breakpoints-l: map-get($breakpoints, 'l');
+
+//Mixin breakpoint
+@mixin breakpoint($bp, $rule: min-width) {
+  $bdValue: if($rule == 'max-width', #{map-get($breakpoints, $bp) - 1}, #{map-get($breakpoints, $bp)});
+  @media screen and (#{$rule}: #{$bdValue}) {
+    @content;
+  }
+}
+
+@mixin btn($background: $black, $background-hover: #2e2e2e, $color: #ffffff) {
+  border: 0;
+  color: $color;
+  background: $background;
+  transition: ease-in-out 0.2s all;
+  outline: none;
+
+  &:hover {
+    transition: ease-in-out 0.2s all;
+    background-color: $background-hover;
+  }
+}
+
+@mixin btn-secondary($border:#2e2e2e, $color: #6f6f6f, $color-hover: #2e2e2e) {
+  border: 1px solid;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  color: $color;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 10px 20px;
+  letter-spacing: 1px;
+  transition: ease-in-out 0.2s all;
+  outline: none;
+
+  &:hover {
+    transition: ease-in-out 0.2s all;
+    color: $color-hover;
+  }
+}
+
+@mixin ico($content) {
+  content: $ico;
+  font-family: $icomoon;
+}
+
+// Mixin arrow
+@mixin arrow($direction, $color, $size, $padding) {
+  border: 0 solid $color;
+  border-width: 0 $size $size 0;
+  border-top: none;
+  border-left: none;
+  padding: $padding;
+
+  @if $direction == 'top' {
+    transform: rotate(-135deg);
+  } @else if $direction == 'right' {
+    transform: rotate(-45deg);
+    margin-right: $padding;
+  } @else if $direction == 'bottom' {
+    transform: rotate(45deg);
+  } @else if $direction == 'left' {
+    transform: rotate(135deg);
+    margin-left: $padding;
+  }
+}
+
+@mixin check($width, $height, $borderColor, $borderWidth) {
+  display: inline-block;
+  margin-top: calc(-1 * (#{$width} - #{$borderWidth}));
+  transform: rotate(45deg);
+  width: $width;
+  height: $height;
+  border-bottom: $borderWidth solid $borderColor;
+  border-right: $borderWidth solid $borderColor;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model;
+  -moz-box-sizing: $box-model;
+  box-sizing: $box-model;
+}
+
+@mixin transform($transform) {
+  -ms-transform: $transform;
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  transform: $transform;
+}
+
+@mixin calc($property, $expression) {
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+@mixin transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($property...) {
+  -moz-transition-property: $property;
+  -o-transition-property: $property;
+  -webkit-transition-property: $property;
+  transition-property: $property;
+}
+
+@mixin transition-duration($duration...) {
+  -moz-transition-property: $duration;
+  -o-transition-property: $duration;
+  -webkit-transition-property: $duration;
+  transition-property: $duration;
+}
+
+@mixin transition-timing-function($timing...) {
+  -moz-transition-timing-function: $timing;
+  -o-transition-timing-function: $timing;
+  -webkit-transition-timing-function: $timing;
+  transition-timing-function: $timing;
+}
+
+@mixin transition-delay($delay...) {
+  -moz-transition-delay: $delay;
+  -o-transition-delay: $delay;
+  -webkit-transition-delay: $delay;
+  transition-delay: $delay;
+}
+
+@mixin white-big-button() {
+  background: #ffffff;
+  border: 2px solid #000000;
+  color: #000000;
+  padding: 14px 30px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: $font_regular;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background: #000000;
+    color: #ffffff;
+  }
+}
+
+@function rem-calc($size) {
+  $remSize: calc($size / 16);
+  @return #{$remSize}rem;
+}
+
+//use mixin for media queries
+@mixin default-link() {
+  position: relative;
+  color: $black;
+  font-size: calc(15 / 16);
+  line-height: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+
+  background-image: linear-gradient(to bottom, transparent 20%, currentColor 21%);
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+
+  transition: background-size 0.75s ease-in-out;
+
+  &:not(.-disabled) {
+
+    &:hover,
+    &.-hover {
+      background-size: 0% 1px;
+      transition-delay: 0s;
+    }
+  }
+
+  &.-small {
+    font-size: rem-calc(13);
+    line-height: 13px;
+  }
+
+  &.-disabled {
+    color: $greyDark;
+  }
+}
+
+@mixin aspectRatio($ratio, $percent) {
+  aspect-ratio: $ratio;
+  @supports not (aspect-ratio: $ratio) {
+    position: relative;
+    height: auto;
+    &::before {
+      float: left;
+      padding-top: $percent;
+      content: "";
+      display: block;
+    }
+    &::after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+    > *:not(dialog) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+@mixin unsetRatio() {
+  aspect-ratio: unset;
+  @supports not (aspect-ratio: 1) {
+    height: inherit;
+    &::before {
+      padding-top: 0;
+    }
+    > * {
+      position: static;
+    }
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+      @content;
+  }
+  &:-moz-placeholder {
+      @content;
+  }
+  &::-moz-placeholder {
+      @content;
+  }
+  &:-ms-input-placeholder {
+      @content;
+  }
+}
+
+@mixin on-focused-field {
+  &:focus{
+    @content;
+  }
+}
+
+@mixin selected-focused-field {
+  &:not(:placeholder-shown),
+  &:focus{
+    @content;
+  }
+}
+
+@mixin init-animation-label($is-not-select: true){
+  @if $is-not-select {
+    @include placeholder {
+      opacity: 0;
+    }
+  }
+  & + .form__label {
+    position: absolute;
+    top: 0;
+    padding: 0 $space-s;
+    transition: 0.3s ease-in-out;
+    margin: 0;
+    line-height: $space-s;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@mixin launch-animation-label($is-not-select: true){
+  @include selected-focused-field{
+    @if $is-not-select {
+      @include placeholder {
+          opacity: 1;
+      }
+    }
+    & + .form__label {
+      background-color: $white;
+      height: auto;
+      margin: 0 $space-s;
+      top: 0;
+      transform: translateY(0);
+      transition-duration: .2s;
+      transform: translate(0, -0.3em) scale(0.9, 0.9);
+    }
+  }
+}
+
+@mixin border-focused-field($color) {
+  @include on-focused-field {
+    border: 1px solid $color;
+    outline: 0 none;
+    & + .form__label {
+      color: $color;
+    }
+
+    ~.form__validIcon {
+      opacity: 0;
+    }
+  }
+}

@@ -1,0 +1,103 @@
+/**********************************************************
+ *******************colors theme***************************
+ **********************************************************/
+
+$primaryColor: #f9e7e1 !default;
+$primaryColorHover: #ED6A88 !default;
+$secondaryColor: #D37F6F !default;
+$promoColor1: #ff7373 !default;
+$promoColor2: #e66464 !default;
+$error: #d60000 !default;
+$warning: #FFA903 !default;
+$valid: #019a10 !default;
+$borderColor: #e7e3e5 !default;
+$background: #f6f6f6 !default;
+$backgroundCrossSell: #a19a9e !default;
+
+$black: #000000 !default;
+$white: #ffffff !default;
+
+$beige: #F9F0EB !default;
+
+$grey: #e7e3e5 !default;
+$greyHover: #3a3a3a !default;
+$greyDark: #a19a9e !default;
+$greyDark2: #c5bec2 !default;
+$greyLight: #A29A9E !default;
+$greyLight2: #A7A7A7 !default;
+
+$green: #50E3C2 !default;
+
+$pink: #f19e9e !default;
+
+/**********************************************************
+ **************Name of variables fonts*********************
+ **********************************************************/
+
+$primaryFont: "WorkSans", Arial !default;
+$etamScript: "EtamScriptType", Arial, sans-serif !default;
+$rubik: "Rubik", "sans-serif" !default;
+/**
+  Images
+*/
+$arrow: "../img/multiArrow.png" !default;
+
+%clearfix {
+
+  &:before,
+  &:after {
+      content: " "; // 1
+      display: table; // 2
+  }
+
+  &:after {
+      clear: both;
+  }
+}
+
+/* Header height */
+$headerHeight: 75px !default;
+$headerHeightMobile: 58px !default;
+
+/* Transitions types */
+$trEase: ease-in-out !default;
+$trBounce: cubic-bezier(.5,1.6,.45,.7) !default;
+$trLinear: linear !default;
+
+$trPrimary: $trEase !default;
+$trSecondary: $trBounce !default;
+$trTertiary: $trLinear !default;
+
+/* Components height */
+$componentFullHeight : calc(100vh - #{$headerHeight}) !default;
+$componentFullHeightMobile : calc(100vh - #{$headerHeightMobile}) !default;
+
+$componentHeightBig : 600px !default;
+$componentHeightBigMobile : 560px !default;
+
+$componentHeightMedium : 300px !default;
+$componentHeightMediumMobile : 310px !default;
+
+$componentHeightSmall : 150px !default;
+$componentHeightSmallMobile : 170px !default;
+
+$componentHeightXSmallMobile : 215px !default;
+
+$componentHeightMobileGlobal : 270px !default;
+
+
+$productTileInfoHeight: 55px !default;
+$productTileInfoHeightWithCallout: 70px !default;
+$productImageRatio: calc(1 / 1.18) !default;
+$productImageRatioPercent: 118% !default;
+$productImageBigRatio: 0.65 !default;
+$productImageBigRatioPercent: 154% !default;
+$productImageBHRatio: 1.2 !default;
+$productImageBHRatioPercent: 83% !default;
+$categoryGridMargin: 30vw !default;
+
+$drillSearchMaxContent: 905px !default;
+
+$floatingBarHeight: 35px !default;
+
+$addToCartHeightMobile: 80px !default;
